@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Application {
+    private static final ClassLoader classLoader = Application.class.getClassLoader();
     private final ByteArrayOutputStream output;
     private final Context polyglot;
     private final List<Source> scripts;
@@ -24,15 +25,33 @@ public class Application {
                 .allowExperimentalOptions(true)
                 .allowIO(true)
                 .option("engine.WarnInterpreterOnly", "false")
-                .option("js.esm-eval-returns-exports", "true")
                 .allowHostAccess(HostAccess.ALL)
                 .allowHostClassLookup(className -> true)
                 .build();
         this.scripts = new ArrayList<>();
+
+        loadJavaScript(Path.of("postman-core.js"), true);
+        loadJavaScript(Path.of("optional-stubs.js"), true);
     }
 
-    public void loadJavaScript(Path path) {
+    public void loadJavaScript(Path filePath) {
+        loadJavaScript(filePath, false);
+    }
+
+    public void loadJavaScript(Path filePath, boolean resource) {
         String result;
+        Path path;
+
+        if (resource) {
+            try {
+                path = Path.of(classLoader.getResource(filePath.toString()).toURI());
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        } else {
+            path = filePath;
+        }
+
         try (InputStream inputStream = Files.newInputStream(path)) {
             byte[] bytes = inputStream.readAllBytes();
             result = new String(bytes, StandardCharsets.UTF_8);
