@@ -5,7 +5,8 @@ import java.nio.file.Path;
 public class Main {
     public static void main(String[] args) {
         Application application = new Application();
-        PostmanWrapper.setEnvironment("protocol", "https");
+        PostmanHandler.setEnvironment("protocol", "https");
+        PostmanHandler.setEnvironment("IEP_API_SECRET_KEY", "test");
 
         application.loadJavaScript(Path.of("CollectionStandardPreRequest.js"));
         application.loadJavaScript(Path.of("StandardPreRequest.js"));

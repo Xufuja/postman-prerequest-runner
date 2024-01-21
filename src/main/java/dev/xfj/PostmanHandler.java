@@ -3,11 +3,11 @@ package dev.xfj;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PostmanWrapper {
+public class PostmanHandler {
     private static final Map<String, String> globals;
     private static final Map<String, String> environment;
 
-    private PostmanWrapper() {
+    private PostmanHandler() {
     }
 
     static {

@@ -1,12 +1,12 @@
 pm = {
     globals: {
         get: function (key) {
-            return Java.type(`dev.xfj.PostmanWrapper`).getGlobal(key);
+            return Java.type(`dev.xfj.PostmanHandler`).getGlobal(key);
         }
     },
     environment: {
         get: function (key) {
-            return Java.type(`dev.xfj.PostmanWrapper`).getEnvironment(key);
+            return Java.type(`dev.xfj.PostmanHandler`).getEnvironment(key);
         },
         values: {
             substitute: function () {
