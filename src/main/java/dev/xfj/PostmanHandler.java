@@ -16,7 +16,7 @@ public class PostmanHandler {
     }
 
     public static String getGlobal(String key) {
-        return globals.get(key);
+        return globals.getOrDefault(key, "VALUE_HERE");
     }
 
     public static void setGlobal(String key, String value) {
@@ -24,7 +24,7 @@ public class PostmanHandler {
     }
 
     public static String getEnvironment(String key) {
-        return environment.get(key);
+        return environment.getOrDefault(key, "VALUE_HERE");
     }
 
     public static void setEnvironment(String key, String value) {

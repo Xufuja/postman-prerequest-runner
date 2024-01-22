@@ -27,6 +27,7 @@ public class Application {
                 .option("engine.WarnInterpreterOnly", "false")
                 .allowHostAccess(HostAccess.ALL)
                 .allowHostClassLookup(className -> true)
+                .out(output)
                 .build();
         this.scripts = new ArrayList<>();
 
